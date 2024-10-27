@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.cdnfonts.com/css/formular');
+
+body {
+  font-family:'Formular', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+:root {
+  --cta: #060eb9;
+  --test: #3D61FF;
+  --bottom: #434789;
+  --top: #060eb9;
+  --gradient1: rgba(0, 3, 66, 0.8);
+  --gradient2: rgba(4,9,30,0.8);
+  --gradient3: rgba(4,9,30,1);
+  --dot: #fd6565;
+  --dot1: #ff0c0c;
+}
+
+p::selection
+,h1::selection,
+span::selection,
+h2::selection {
+  color: white;
+  background: #060eb9;
+}
+
+::selection {
+  color: white;
+  background: #060eb9;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 237 41% 99%;
+    --foreground: 237 51% 4%;
+    --muted: 237 26% 91%;
+    --muted-foreground: 237 0% 33%;
+    --popover: 237 41% 99%;
+    --popover-foreground: 237 51% 4%;
+    --card: 237 41% 99%;
+    --card-foreground: 237 51% 4%;
+    --border: 237 10% 94%;
+    --input: 237 10% 94%;
+    --primary: 237 83% 38%;
+    --primary-foreground: 237 83% 98%;
+    --secondary: 237 8% 88%;
+    --secondary-foreground: 237 8% 28%;
+    --accent: 237 8% 88%;
+    --accent-foreground: 237 8% 28%;
+    --destructive: 7 89% 29%;
+    --destructive-foreground: 7 89% 89%;
+    --ring: 237 83% 38%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 237 39% 4%;
+    --foreground: 237 28% 98%;
+    --muted: 237 26% 9%;
+    --muted-foreground: 237 0% 67%;
+    --popover: 237 39% 4%;
+    --popover-foreground: 237 28% 98%;
+    --card: 237 39% 4%;
+    --card-foreground: 237 28% 98%;
+    --border: 237 10% 10%;
+    --input: 237 10% 10%;
+    --primary: 237 83% 38%;
+    --primary-foreground: 237 83% 98%;
+    --secondary: 237 15% 17%;
+    --secondary-foreground: 237 15% 77%;
+    --accent: 237 15% 17%;
+    --accent-foreground: 237 15% 77%;
+    --destructive: 7 89% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --ring: 237 83% 38%;
+  }
+}
+
+
+
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
