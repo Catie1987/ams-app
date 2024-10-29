@@ -8,6 +8,7 @@ export default {
       },
     },
     navbar: {
+      home: "Home",
       about: "About us",
       overview: "Overview",
       overview1: "AMS Vietnam has been officially established on the basis of trust and sustainable.",
@@ -57,5 +58,14 @@ export default {
 
     blog:{ 
       blogpage: "Blog Page"
-    }
+    },
+    product: {
+      maker: "Manufacture",
+      package: "Package size",
+      shelflife: "Shelf Life",
+      inquiries: "Send Inquiries",
+      description: "Description",
+      spec: "Sepcification",
+      info: "TDS/SDS"
+    },
   } as const

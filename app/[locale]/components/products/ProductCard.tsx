@@ -1,28 +1,35 @@
-
 import Link from 'next/link';
-import ContentfulImage from '../ui/ContentfullImage';
+import Image from 'next/image';
 
-const ProductCard = ({ product }: { product: any }) => {
-  const { productCode, productName, productImage, description} = product.fields;
+const ProductCard = ({ product } : {product:any}) => {
+  const { name, id,packing, image ,maker} = product.fields;
+  const noimageurl = "https://res.cloudinary.com/dsrswsitk/image/upload/v1730165281/ams/ssag8srtsnjxgbsotbfr.jpg"
 
   return (
-    <li className='rounded-md overflow-hidden shadow-md'>
-      <Link href={`/products/${productCode}`} aria-label={productName}>
-        <div className='mb-2'>
-          <ContentfulImage
-            alt={`Cover Image for ${productName}`}
-            src={productImage.fields.file.url}
-            width={productImage.fields.file.details.image.width}
-            height={productImage.fields.file.details.image.height}
-          />
-        </div>
-        <div className='p-4'>
-          <h3 className='text-xl mb-1 leading-snug'>{productName}</h3>
-          <div className='text-sm mb-4 text-gray-400'>
-            
-          </div>
-          <p className='text-base mb-4'>{description}</p>
-          
+    <li className='rounded-lg overflow-hidden shadow-lg bg-white group border'>
+      <Link href={`/product/${id}`} aria-label={name}>
+        <div className='h-60 flex flex-col relative overflow-hidden'>
+            <div className='w-full bg-[--cta] text-white py-1 px-3 z-20'>{name}</div>
+              <div className='w-full overflow-hidden h-4/5'>
+              {image?.fields?.file.url ? (
+                <Image src={'https:'+image.fields.file.url} width={300} height={300} alt={`Cover Image for ${name}`}
+                className='object-cover w-full h-full group-hover:scale-110 transition-transform duration-300' />
+              ) :(<img src={noimageurl} alt='' className='object-cover w-full h-full'/>)}
+                </div>
+             
+              <div className='h-1/5 w-full flex items-center justify-center py-2'> 
+              {maker?.fields?.logo?.fields.file.url ? (
+                <img src={'https:'+(maker?.fields?.logo?.fields.file.url || '')} width={100} height={50} alt={maker?.fields?.makerName || 'N/A'}
+                className='object-cover w-1/2'/>) : (
+                <div className='w-full text-center font-medium text-gray-800'> Manufacture: {maker?.fields?.makerName || 'N/A'}</div>)}
+              </div>
+
+          <div className='absolute flex bg-blue-700/70 left-0 h-full w-full z-10 translate-y-full group-hover:translate-y-0 duration-300 items-end'>
+            <ul className='relative w-full h-[calc(100%-40px)] mb-0 flex flex-col justify-center list-disc ml-8 pr-2'>
+              <li className='text-white'>Manufacture: {maker?.fields?.makerName || 'N/A'}</li>
+              <li className='text-white'>Package size: {packing || ''}</li>
+            </ul>
+          </div>  
         </div>
       </Link>
     </li>

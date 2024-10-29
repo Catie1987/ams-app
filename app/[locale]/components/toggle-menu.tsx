@@ -1,4 +1,4 @@
-"use client";
+
 import React , {useState} from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import {motion} from 'framer-motion';
@@ -7,7 +7,7 @@ import { businessOption } from '@/app/constants/types';
 import { getBusinessOptions } from './businessOptions';
 import { useCurrentLocale, useI18n, useScopedI18n } from '@/locales/client';
 import { SearchForm } from './search-form';
-import { Factory, Waypoints, Settings, Warehouse } from 'lucide-react';
+import { Factory, Waypoints, Settings} from 'lucide-react';
 import Link from 'next/link';
 
 export default function ToggleButton() {
@@ -55,7 +55,7 @@ export default function ToggleButton() {
                 <div className='divide-y flex flex-col gap-2 text-gray-800'>
                   <div className='mt-4'>
                     <div className='flex w-full justify-between items-center mb-2'>
-                      <Link href={`/${locale}/about`} className='text-lg font-medium hover:text-[--cta] hover:font-semibold'>
+                      <Link onClick={toggleMenu} href={`/${locale}/about`} className='text-lg font-medium hover:text-[--cta] hover:font-semibold'>
                       {t('navbar.about')}
                       </Link>
                       <div className="w-8 h-8 relative flex items-center justify-center">
@@ -81,15 +81,15 @@ export default function ToggleButton() {
                      animate={{ height: isShow ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
                      transition={{ duration: 0.3, ease: 'easeInOut' }}
                     className={`pl-4 flex flex-col gap-2 overflow-hidden text-base`}>
-                      <li className='hover:text-[--cta] hover:font-semibold'><Link href={`/${locale}/about/overview`}>{navbarT('overview')}</Link></li>
-                      <li className='hover:text-[--cta] hover:font-semibold'><Link href={`/${locale}/about/principle`}>{navbarT('principles')}</Link></li>
-                      <li className='hover:text-[--cta] hover:font-semibold'><Link href={`/${locale}/about/visionvalue`}>{navbarT('visionvalue')}</Link></li>
-                      <li className='hover:text-[--cta] hover:font-semibold'><Link href={`/${locale}/about/message`}>{navbarT('message')}</Link></li>
+                      <li className='hover:text-[--cta] hover:font-semibold'><Link onClick={toggleMenu} href={`/${locale}/about/overview`}>{navbarT('overview')}</Link></li>
+                      <li className='hover:text-[--cta] hover:font-semibold'><Link onClick={toggleMenu} href={`/${locale}/about/principle`}>{navbarT('principles')}</Link></li>
+                      <li className='hover:text-[--cta] hover:font-semibold'><Link onClick={toggleMenu} href={`/${locale}/about/visionvalue`}>{navbarT('visionvalue')}</Link></li>
+                      <li className='hover:text-[--cta] hover:font-semibold'><Link onClick={toggleMenu} href={`/${locale}/about/message`}>{navbarT('message')}</Link></li>
                     </motion.ul>
                   </div>
                   <div className='pt-2'>
                     <div className='flex w-full justify-between items-center mb-2'>
-                      <Link href={`/${locale}/business`} className='text-lg font-medium hover:text-[--cta] hover:font-semibold'>
+                      <Link onClick={toggleMenu} href={`/${locale}/business`} className='text-lg font-medium hover:text-[--cta] hover:font-semibold'>
                       {t('navbar.business')}
                       </Link>
                       <div className="w-8 h-8 relative flex items-center justify-center">
@@ -116,7 +116,7 @@ export default function ToggleButton() {
                      transition={{ duration: 0.3, ease: 'easeInOut' }}
                     className={`pl-4 flex flex-col gap-2 overflow-hidden text-base`}>
                       {businessOptions.map((business) => (
-                          <li className='hover:text-[--cta] hover:font-semibold' key={business.title}>
+                          <li onClick={toggleMenu} className='hover:text-[--cta] hover:font-semibold' key={business.title}>
                               <Link href={business.href}>{business.title}</Link>
                           </li>
                       ))}
@@ -125,7 +125,7 @@ export default function ToggleButton() {
                   </div>
                   <div className='pt-2'>
                     <div className='flex w-full justify-between items-center mb-2'>
-                      <Link href={`/${locale}/product`} className='text-lg font-medium hover:text-[--cta] hover:font-semibold'>
+                      <Link onClick={toggleMenu} href={`/${locale}/product`} className='text-lg font-medium hover:text-[--cta] hover:font-semibold'>
                       {t('navbar.product')}
                       </Link>
                       <div className="w-8 h-8 relative flex items-center justify-center">
@@ -155,20 +155,20 @@ export default function ToggleButton() {
                       <div className='relative mt-2 w-full px-4 py-6 flex items-center bg-gradient-to-b from-[--top] to-[--bottom] rounded-md mb-2'>
                         <SearchForm/>
                       </div>
-                      <li className='hover:text-[--cta] hover:font-semibold text-gray-700'><Link className='flex gap-2 items-center' href={`/${locale}/product/maker`}>
+                      <li onClick={toggleMenu} className='hover:text-[--cta] hover:font-semibold text-gray-700'><Link className='flex gap-2 items-center' href={`/${locale}/product/maker`}>
                         <Factory size={20}/>{navbarT('product1')}
                       </Link></li>
-                      <li className='hover:text-[--cta] hover:font-semibold text-gray-700'><Link className='flex gap-2 items-center' href={`/${locale}/product/type`}>
+                      <li onClick={toggleMenu} className='hover:text-[--cta] hover:font-semibold text-gray-700'><Link className='flex gap-2 items-center' href={`/${locale}/product/type`}>
                         <Waypoints size={20}/>{navbarT('product2')}
                       </Link></li>
-                      <li className='hover:text-[--cta] hover:font-semibold text-gray-700'><Link className='flex gap-2 items-center' href={`/${locale}/product/function`}>
+                      <li onClick={toggleMenu} className='hover:text-[--cta] hover:font-semibold text-gray-700'><Link className='flex gap-2 items-center' href={`/${locale}/product/function`}>
                         <Settings size={20}/>{navbarT('product3')}
                       </Link></li>
                       </motion.ul>
                     
                   </div>
                   <div className='pt-2'>
-                    <div className='flex w-full justify-between items-center mb-2'>
+                    <div onClick={toggleMenu} className='flex w-full justify-between items-center mb-2'>
                       <Link href={`/${locale}/blog`} className='text-lg font-medium hover:text-[--cta] hover:font-semibold'>
                       {t('navbar.blog')}
                       </Link>
@@ -176,7 +176,7 @@ export default function ToggleButton() {
                   </div>
                   <div className='py-4'>
 
-                    <Button size="full" className='w-full text-lg font-normal'>
+                    <Button onClick={toggleMenu} size="full" className='w-full text-lg font-normal'>
                       <Link href={`/${locale}/contact`}>
                       {t('navbar.contact')}
                       </Link>

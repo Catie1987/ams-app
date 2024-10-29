@@ -33,9 +33,9 @@ const navbarT = useScopedI18n('navbar');
                         <div className='inline-flex gap-4 mt-4'><Mail size={16}/><span className='normal-case'>info@amsvn.net</span></div>
                     </div>
                     <div className='inline-flex gap-3 mt-6'>
-                        <Link href='' className='h-10 w-10 border border-gray-500/50 bg-black/20 place-items-center place-content-center rounded-full hover:bg-black/70 hover:border-gray-300 transition-colors duration-300'><Facebook size={18}/></Link>
-                        <Link href='' className='h-10 w-10 border border-gray-500/50 bg-black/20 place-items-center place-content-center rounded-full hover:bg-black/70 hover:border-gray-300 transition-colors duration-300'><Youtube size={18}/></Link>
-                        <Link href='' className='h-10 w-10 border border-gray-500/50 bg-black/20 place-items-center place-content-center rounded-full hover:bg-black/70 hover:border-gray-300 transition-colors duration-300'><Linkedin size={18}/></Link>
+                        <Link href='' className='h-10 w-10 border border-gray-500/50 bg-black/20 flex items-center justify-center rounded-full hover:bg-black/70 hover:border-gray-300 transition-colors duration-300'><Facebook size={18}/></Link>
+                        <Link href='' className='h-10 w-10 border border-gray-500/50 bg-black/20 flex items-center justify-center rounded-full hover:bg-black/70 hover:border-gray-300 transition-colors duration-300'><Youtube size={18}/></Link>
+                        <Link href='' className='h-10 w-10 border border-gray-500/50 bg-black/20 flex items-center justify-center rounded-full hover:bg-black/70 hover:border-gray-300 transition-colors duration-300'><Linkedin size={18}/></Link>
                     </div>
                 </div>
                 <div className='tracking-widest'>

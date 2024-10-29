@@ -6,8 +6,8 @@ import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 import { fetchBlogPost, fetchBlogPosts } from '@/lib/contentful/blogPosts';
 import arrowBack from '@/components/icons/arrow-right-black.svg';
-import { getI18n, getScopedI18n, getCurrentLocale } from "@/locales/server";
-import RichText from '../../components/RichText';
+import { getScopedI18n, getCurrentLocale } from "@/locales/server";
+import RichText from '../../components/ui/RichText';
 
 
 interface BlogPostPageParams {
@@ -37,7 +37,6 @@ export async function generateMetadata({ params }: BlogPostPageProps, parent: Re
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-    const t = await getI18n();
     const blogT = await getScopedI18n('blog');
     const locale = getCurrentLocale();
 	const blogPost = await fetchBlogPost({ slug: params.slug, preview: draftMode().isEnabled })

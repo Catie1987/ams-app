@@ -1,5 +1,6 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from 'contentful'
 
+
 export interface TypeBlogPostFields {
 	title?: EntryFieldTypes.Symbol
 	slug: EntryFieldTypes.Symbol

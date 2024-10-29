@@ -22,7 +22,10 @@ body {
 p::selection
 ,h1::selection,
 span::selection,
-h2::selection {
+h2::selection,
+h3::selection,
+h4::selection
+h5::selection {
   color: white;
   background: #060eb9;
 }
@@ -31,6 +34,8 @@ h2::selection {
   color: white;
   background: #060eb9;
 }
+
+
 
 @layer utilities {
   .text-balance {

@@ -21,7 +21,7 @@ const PostCard = ({ post } : {post:any}) => {
                 </h2>
                 
                 <div className='text-gray-700 line-clamp-2 text-ellipsis mt-2'>
-                  {documentToReactComponents(post.fields.content)}
+                  {documentToReactComponents(content)}
                 </div>
             </div>
             <div className='-bottom-20 h-0 group-hover:h-10 group-hover:bottom-0 transition-all duration-300 relative flex gap-4 px-5 items-center'>

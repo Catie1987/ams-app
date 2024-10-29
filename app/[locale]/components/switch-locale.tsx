@@ -1,4 +1,4 @@
-'use client'
+
 import { useChangeLocale, useCurrentLocale } from '../../../locales/client'
  
 export default function SwitchLocale() {

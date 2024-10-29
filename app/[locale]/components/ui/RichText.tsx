@@ -1,7 +1,7 @@
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import Link from 'next/link'
-import ContentfulImage from './ui/ContentfullImage';
+import ContentfulImage from './ContentfullImage';
 import { useCurrentLocale } from '@/locales/client';
 
 const options = {
@@ -15,6 +15,26 @@ const options = {
     }
   },
   renderNode: {
+    [BLOCKS.HEADING_3]: (node:any, children:any) => <h3 className='text-xl font-semibold py-2'>{children}</h3>,
+    [BLOCKS.HEADING_2]: (node:any, children:any) => <h2 className='text-2xl font-semibold py-2'>{children}</h2>,
+    [BLOCKS.HEADING_1]: (node:any, children:any) => <h1 className='text-3xl font-bold py-2'>{children}</h1>,
+    [BLOCKS.UL_LIST]: (node:any, children:any) => <ul className='pl-8 list-disc'>{children}</ul>,
+    [BLOCKS.OL_LIST]: (node:any, children:any) => <ol className='pl-8 list-decimal'>{children}</ol>,
+    [BLOCKS.LIST_ITEM]: (node:any, children:any) => <li className=''>{children}</li>,
+
+    [BLOCKS.TABLE]: (node:any, children:any) => (
+      <table className="w-full">{children}</table>
+    ),
+    [BLOCKS.TABLE_ROW]: (node:any, children:any) => (
+      <tr className="even:bg-gray-100">{children}</tr>
+    ),
+    [BLOCKS.TABLE_CELL]: (node:any, children:any) => (
+      <td className="px-2">{children}</td>
+    ),
+    [BLOCKS.TABLE_HEADER_CELL]: (node:any, children:any) => (
+      <th className="text-start px-2">{children}</th>
+    ),
+
     [BLOCKS.PARAGRAPH]: (node:any, children:any) => {
       if (
         node.content.find((item:any) =>
@@ -30,7 +50,13 @@ const options = {
         )
       }
 
-      return <p>{children}</p>
+      return (
+        <>
+        <hr className='block bg-transparent h-1 border-0'/>
+        <p className='text-gray-800'>{children}</p>
+        <hr className='block bg-transparent h-2 border-0'/>
+        </>
+      )
     },
 
     [INLINES.ENTRY_HYPERLINK]: (node:any) => {
@@ -82,7 +108,12 @@ const options = {
 }
 
 const RichText = ({ content }: { content: any }) => {
-  return <>{documentToReactComponents(content, options)}</>
-}
+  // Check if content is available
+  if (!content) {
+    return null;
+  }
 
-export default RichText
+  return <>{documentToReactComponents(content, options)}</>;
+};
+
+export default RichText;
