@@ -1,11 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import arrowBack from '@/components/icons/arrow-right-black.svg';
 import { Button } from '@/components/ui/button';
 import { Metadata, ResolvingMetadata } from 'next';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { fetchProduct, fetchProducts } from '@/lib/contentful/productPosts';
-import { getScopedI18n } from "@/locales/server";
+import { getScopedI18n, getCurrentLocale } from "@/locales/server";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import RichText from '../../components/ui/RichText';
 
@@ -32,14 +34,12 @@ export async function generateMetadata({ params }: ProductPageProps, parent: Res
 
 export default async function ProductContent({ params }: ProductPageProps) {
   const t = await getScopedI18n('product');
-  console.log('Fetching product with ID:', params.id);
   const productPost = await fetchProduct({ id: params.id, preview: draftMode().isEnabled });
   
   if (!productPost) {
     return notFound();
   }
-
-
+  const locale=getCurrentLocale();
   const noImageUrl = "https://res.cloudinary.com/dsrswsitk/image/upload/v1730165281/ams/ssag8srtsnjxgbsotbfr.jpg";
 
   return (
@@ -86,6 +86,9 @@ export default async function ProductContent({ params }: ProductPageProps) {
               <TabsContent value="info" className=''>Download TDS/SDS</TabsContent>
             </div>
           </Tabs>
+        </div>
+        <div className='w-full h-14 flex items-center mt-10'>
+        <Link className='flex items-center gap-4 border rounded-full py-2 px-10 border-gray-700' href={`/${locale}/product`}><Image alt="" src={arrowBack} className='rotate-180 mt-1'/> Go Back </Link>
         </div>
       </section>
       <div className='border bg-gray-200/50 basis-1/5 max-md:basis-0 min-w-64'>
