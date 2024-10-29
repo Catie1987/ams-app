@@ -23,12 +23,6 @@ export async function generateStaticParams(): Promise<BlogPostPageParams[]> {
 	return blogPosts.map((post) => ({ slug: post.slug }))
 }
 
-export async function getStaticPaths() { 
-    const blogPosts = await fetchBlogPosts({ preview: false }); 
-    const paths = blogPosts.map((post) => ({ params: { slug: post.slug }, })); 
-    return { paths, fallback: 'blocking',};
-}
-
 export async function generateMetadata({ params }: BlogPostPageProps, parent: ResolvingMetadata): Promise<Metadata> {
 	const blogPost = await fetchBlogPost({ slug: params.slug, preview: draftMode().isEnabled })
 	if (!blogPost) {
