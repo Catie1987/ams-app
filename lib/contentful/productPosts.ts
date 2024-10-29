@@ -62,7 +62,7 @@ export async function fetchProduct({ id, preview }: FetchProductOptions): Promis
 	const ProductsResult = await contentful.getEntries<TypeProductSkeleton>({
 		content_type: 'product',
 		'fields.id': id,
-		include: 2,
+		include: 4,
 	})
 
 	return parseContentfulProductPost(ProductsResult.items[0])

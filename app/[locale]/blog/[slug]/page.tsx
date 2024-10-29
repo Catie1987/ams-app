@@ -20,17 +20,14 @@ interface BlogPostPageProps {
 
 export async function generateStaticParams(): Promise<BlogPostPageParams[]> {
 	const blogPosts = await fetchBlogPosts({ preview: false })
-
 	return blogPosts.map((post) => ({ slug: post.slug }))
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps, parent: ResolvingMetadata): Promise<Metadata> {
 	const blogPost = await fetchBlogPost({ slug: params.slug, preview: draftMode().isEnabled })
-
 	if (!blogPost) {
 		return notFound()
 	}
-
 	return {
 		title: blogPost.title,
 	}

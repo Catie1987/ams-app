@@ -32,11 +32,14 @@ export async function generateMetadata({ params }: ProductPageProps, parent: Res
 
 export default async function ProductContent({ params }: ProductPageProps) {
   const t = await getScopedI18n('product');
+  console.log('Fetching product with ID:', params.id);
   const productPost = await fetchProduct({ id: params.id, preview: draftMode().isEnabled });
   
   if (!productPost) {
     return notFound();
   }
+
+
   const noImageUrl = "https://res.cloudinary.com/dsrswsitk/image/upload/v1730165281/ams/ssag8srtsnjxgbsotbfr.jpg";
 
   return (
