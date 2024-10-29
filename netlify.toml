@@ -1,6 +1,3 @@
 [build]
   command = "NEXT_PUBLIC_BASE_URL=\"${NEXT_PUBLIC_BASE_URL:-$URL}\" npm run build"
 publish = "build" 
-[[redirects]] from = "/blog/*" to = "/blog/[slug]" 
-status = 301 
-force = true
