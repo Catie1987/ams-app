@@ -8,11 +8,13 @@ import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { fetchProduct, fetchProducts } from '@/lib/contentful/productPosts';
 import { getScopedI18n, getCurrentLocale } from "@/locales/server";
+import { setStaticParamsLocale } from 'next-international/server';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import RichText from '../../components/ui/RichText';
 
 interface ProductPageParams {
   id: string;
+  locale: string;
 }
 
 interface ProductPageProps {
@@ -21,7 +23,7 @@ interface ProductPageProps {
 
 export async function generateStaticParams(): Promise<ProductPageParams[]> {
   const productPosts = await fetchProducts({ preview: false });
-  return productPosts.map((product) => ({ id: product.id }));
+  return productPosts.map((product) => ({ id: product.id, locale: "en"  }));
 }
 
 export async function generateMetadata({ params }: ProductPageProps, parent: ResolvingMetadata): Promise<Metadata> {
@@ -33,6 +35,7 @@ export async function generateMetadata({ params }: ProductPageProps, parent: Res
 }
 
 export default async function ProductContent({ params }: ProductPageProps) {
+  setStaticParamsLocale(params.locale);
   const t = await getScopedI18n('product');
   const productPost = await fetchProduct({ id: params.id, preview: draftMode().isEnabled });
   
