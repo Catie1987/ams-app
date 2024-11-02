@@ -3,7 +3,7 @@ import React from 'react';
 import { useChangeLocale, useCurrentLocale } from '../../../locales/client'
 
 import { useTransition, useState  } from 'react';
-import { Globe,ChevronDown } from 'lucide-react';
+import { Globe} from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,

@@ -9,7 +9,7 @@ const ProductCard = ({ product } : {product:any}) => {
     <li className='rounded-lg overflow-hidden shadow-lg bg-white group border'>
       <Link href={`/product/${id}`} aria-label={name}>
         <div className='h-60 flex flex-col relative overflow-hidden'>
-            <div className='w-full bg-[--cta] text-white py-1 px-3 z-20 min-h-14'>{name}</div>
+            <div className='w-full bg-[--cta] text-white py-1 px-3 z-20 min-h-14 line-clamp-2 text-ellipsis'>{name}</div>
               <div className='w-full overflow-hidden h-4/5 flex items-center justify-center'>
               {image?.fields?.file.url ? (
                 <Image src={'https:'+image.fields.file.url} width={300} height={200} alt={`Cover Image for ${name}`}
@@ -19,7 +19,7 @@ const ProductCard = ({ product } : {product:any}) => {
              
               <div className='h-1/5 w-full flex items-center justify-center py-2 overflow-hidden'> 
               {maker?.fields?.logo?.fields.file.url ? (
-                <img src={'https:'+(maker?.fields?.logo?.fields.file.url || '')} width={100} height={50} alt={maker?.fields?.makerName || 'N/A'}
+                <img src={'https:'+(maker?.fields?.logo?.fields.file.url || '')} alt={maker?.fields?.makerName || 'N/A'}
                 className='object-cover h-full w-auto'/>) : (
                 <div className='w-full text-center font-medium text-gray-800'> Manufacture: {maker?.fields?.makerName || 'N/A'}</div>)}
               </div>

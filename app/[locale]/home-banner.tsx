@@ -8,7 +8,7 @@ const HomeBanner = () => {
             <Image
               src={banner1}
               alt="Background"
-              
+              priority
               quality={100}
               className="z-0 object-cover w-full h-full"  // Make sure the image is behind the gradient
             />

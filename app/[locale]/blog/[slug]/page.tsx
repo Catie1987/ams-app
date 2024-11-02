@@ -7,11 +7,13 @@ import { notFound } from 'next/navigation'
 import { fetchBlogPost, fetchBlogPosts } from '@/lib/contentful/blogPosts';
 import arrowBack from '@/components/icons/arrow-right-black.svg';
 import { getScopedI18n, getCurrentLocale } from "@/locales/server";
+import { setStaticParamsLocale } from 'next-international/server';
 import RichText from '../../components/ui/RichText';
 
 
 interface BlogPostPageParams {
 	slug: string
+    locale: string;
 }
 
 interface BlogPostPageProps {
@@ -20,7 +22,7 @@ interface BlogPostPageProps {
 
 export async function generateStaticParams(): Promise<BlogPostPageParams[]> {
 	const blogPosts = await fetchBlogPosts({ preview: false })
-	return blogPosts.map((post) => ({ slug: post.slug }))
+	return blogPosts.map((post) => ({ slug: post.slug, locale: "en" }))
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps, parent: ResolvingMetadata): Promise<Metadata> {
@@ -35,6 +37,7 @@ export async function generateMetadata({ params }: BlogPostPageProps, parent: Re
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
+    setStaticParamsLocale(params.locale);
     const blogT = await getScopedI18n('blog');
     const locale = getCurrentLocale();
 	const blogPost = await fetchBlogPost({ slug: params.slug, preview: draftMode().isEnabled })

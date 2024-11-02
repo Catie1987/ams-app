@@ -7,6 +7,11 @@ export default {
         second: "this is second line"
       },
     },
+    notfound : {
+      moving: "We're always moving. This page may have moved too.",
+      sorry: "Sorry about that. Please check the link and try again, or try the ",
+      home: "homepage",
+    },
     navbar: {
       home: "Home",
       about: "About us",

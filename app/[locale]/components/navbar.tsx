@@ -21,7 +21,7 @@ import { SearchForm } from './search-form';
 import { Factory, Waypoints, Settings } from 'lucide-react';
 
 
-export async function Navbar() {
+export function Navbar() {
   const locale = useCurrentLocale();
   const t = useI18n();
   const navbarT = useScopedI18n('navbar');
