@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-const ProductCard = ({ product } : {product:any}) => {
+const ProductCard = ({ product, locale } : {product:any, locale:any}) => {
   const { name, id,packing, image ,maker} = product.fields;
   const noimageurl = "https://res.cloudinary.com/dsrswsitk/image/upload/v1730165281/ams/ssag8srtsnjxgbsotbfr.jpg"
 

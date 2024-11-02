@@ -15,9 +15,9 @@ const options = {
     }
   },
   renderNode: {
-    [BLOCKS.HEADING_3]: (node:any, children:any) => <h3 className='text-xl font-semibold py-2'>{children}</h3>,
-    [BLOCKS.HEADING_2]: (node:any, children:any) => <h2 className='text-2xl font-semibold py-2'>{children}</h2>,
-    [BLOCKS.HEADING_1]: (node:any, children:any) => <h1 className='text-3xl font-bold py-2'>{children}</h1>,
+    [BLOCKS.HEADING_3]: (node:any, children:any) => <h3 className='text-xl font-semibold py-2 w-full'>{children}</h3>,
+    [BLOCKS.HEADING_2]: (node:any, children:any) => <h2 className='text-2xl font-semibold py-2 w-full'>{children}</h2>,
+    [BLOCKS.HEADING_1]: (node:any, children:any) => <h1 className='text-3xl font-bold py-2 w-full'>{children}</h1>,
     [BLOCKS.UL_LIST]: (node:any, children:any) => <ul className='pl-8 list-disc'>{children}</ul>,
     [BLOCKS.OL_LIST]: (node:any, children:any) => <ol className='pl-8 list-decimal'>{children}</ol>,
     [BLOCKS.LIST_ITEM]: (node:any, children:any) => <li className=''>{children}</li>,
@@ -100,7 +100,7 @@ const options = {
           height={node.data.target.fields.file.details.image.height}
           width={node.data.target.fields.file.details.image.width}
           alt={node.data.target.fields.title}
-          className='h-20 w-20'
+          className="my-6"
         />
       )
     }

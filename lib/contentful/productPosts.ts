@@ -3,6 +3,7 @@ import { Entry } from 'contentful'
 import { Document as RichTextDocument } from '@contentful/rich-text-types'
 import contentfulClient from './client'
 import { ContentImage, parseContentfulContentImage } from './contentImage'
+import { mapToContentfulLocale } from './types/locales'
 
 type ProductPostEntry = Entry<TypeProductSkeleton, undefined, string>
 
@@ -39,12 +40,15 @@ export function parseContentfulProductPost(productPostEntry?: ProductPostEntry):
 
 interface FetchProductsOptions {
 	preview: boolean
+	locale: string
 }
-export async function fetchProducts({ preview }: FetchProductsOptions): Promise<ProductPost[]> {
+export async function fetchProducts({ preview, locale }: FetchProductsOptions): Promise<ProductPost[]> {
+	const contentfulLocale = mapToContentfulLocale(locale);
 	const contentful = contentfulClient({ preview })
 
 	const ProductsResult = await contentful.getEntries<TypeProductSkeleton>({
 		content_type: 'product',
+		locale: contentfulLocale,
 		include: 2,
 		order: ['fields.name'],
 	})
@@ -55,14 +59,17 @@ export async function fetchProducts({ preview }: FetchProductsOptions): Promise<
 interface FetchProductOptions {
 	id: string
 	preview: boolean
+	locale: string
 }
-export async function fetchProduct({ id, preview }: FetchProductOptions): Promise<ProductPost | null> {
+export async function fetchProduct({ id, preview, locale }: FetchProductOptions): Promise<ProductPost | null> {
 	const contentful = contentfulClient({ preview })
+	const contentfulLocale = mapToContentfulLocale(locale);
 
 	const ProductsResult = await contentful.getEntries<TypeProductSkeleton>({
 		content_type: 'product',
 		'fields.id': id,
 		include: 4,
+		locale: contentfulLocale,
 	})
 
 	return parseContentfulProductPost(ProductsResult.items[0])

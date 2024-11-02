@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={params.locale}>
-      <body>
+      <body data-locale={params.locale}>
         
         <Providers locale={params.locale}>
           <Header/>

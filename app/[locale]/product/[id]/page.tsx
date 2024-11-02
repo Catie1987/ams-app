@@ -19,15 +19,22 @@ interface ProductPageParams {
 
 interface ProductPageProps {
   params: ProductPageParams;
+  locale: string
 }
 
 export async function generateStaticParams(): Promise<ProductPageParams[]> {
-  const productPosts = await fetchProducts({ preview: false });
-  return productPosts.map((product) => ({ id: product.id, locale: "en"  }));
+  const locales = ['en', 'vn','ja', 'zh'];
+  const productPosts = locales.map(async (locale) => {
+        const products = await fetchProducts({ preview: false, locale });
+        return products.map((product) => ({ id: product.id, locale}));
+  });
+  const results = await Promise.all(productPosts);
+    return results.flat();
+  
 }
 
-export async function generateMetadata({ params }: ProductPageProps, parent: ResolvingMetadata): Promise<Metadata> {
-  const productPost = await fetchProduct({ id: params.id, preview: draftMode().isEnabled });
+export async function generateMetadata({ params, locale }: ProductPageProps, parent: ResolvingMetadata): Promise<Metadata> {
+  const productPost = await fetchProduct({ id: params.id, preview: draftMode().isEnabled, locale });
   if (!productPost) {
     return notFound();
   }
@@ -35,14 +42,14 @@ export async function generateMetadata({ params }: ProductPageProps, parent: Res
 }
 
 export default async function ProductContent({ params }: ProductPageProps) {
+  const { id, locale } = params;
   setStaticParamsLocale(params.locale);
   const t = await getScopedI18n('product');
-  const productPost = await fetchProduct({ id: params.id, preview: draftMode().isEnabled });
+  const productPost = await fetchProduct({ id: params.id, preview: draftMode().isEnabled, locale });
   
   if (!productPost) {
     return notFound();
   }
-  const locale=getCurrentLocale();
   const noImageUrl = "https://res.cloudinary.com/dsrswsitk/image/upload/v1730165281/ams/ssag8srtsnjxgbsotbfr.jpg";
 
   return (
