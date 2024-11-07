@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata, ResolvingMetadata } from 'next'
@@ -58,7 +58,7 @@ export default async function BlogPostPage({ params}: BlogPostPageProps) {
 		<main className="w-full">
             <section className="min-h-screen w-full flex flex-col items-center pt-16">
                 <div className='w-full max-w-7xl px-4 mb-10'>
-                <h1 className='text-3xl md:text-4xl font-semibold w-full mt-10 text-[--cta]'>{blogPost.title}</h1>
+                <h1 className='text-3xl md:text-4xl font-bold w-full mt-10 text-[--cta]'>{blogPost.title}</h1>
                 <div className='w-full flex mt-4 gap-2'>
                     <Button variant="secondary" size="sm2">#tag1</Button>
                     <Button variant="secondary" size="sm2">#tag2</Button>
@@ -75,9 +75,9 @@ export default async function BlogPostPage({ params}: BlogPostPageProps) {
                             />
                             </div>
                         )}
-                        
+                        <Suspense>
                         <RichText content={blogPost.content} />
-                        
+                        </Suspense>
                     </div>
                     <Link className='mt-10 w-fit flex items-center gap-4 border rounded-full py-2 px-10 border-gray-700' href={`/${locale}/blog`}><Image alt="" src={arrowBack} className='rotate-180 mt-1'/> {blogT('blogpage')}</Link>
                 </div>

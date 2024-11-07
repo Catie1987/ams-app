@@ -21,7 +21,7 @@ export default function RootLayout({
   }
 }>) {
   return (
-    <html lang={params.locale}>
+    <html lang={params.locale} suppressHydrationWarning>
       <body data-locale={params.locale}>
         
         <Providers locale={params.locale}>

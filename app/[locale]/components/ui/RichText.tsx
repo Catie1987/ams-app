@@ -18,21 +18,21 @@ const options = {
     [BLOCKS.HEADING_3]: (node:any, children:any) => <h3 className='text-xl font-semibold py-2 w-full'>{children}</h3>,
     [BLOCKS.HEADING_2]: (node:any, children:any) => <h2 className='text-2xl font-semibold py-2 w-full'>{children}</h2>,
     [BLOCKS.HEADING_1]: (node:any, children:any) => <h1 className='text-3xl font-bold py-2 w-full'>{children}</h1>,
-    [BLOCKS.UL_LIST]: (node:any, children:any) => <ul className='pl-8 list-disc'>{children}</ul>,
-    [BLOCKS.OL_LIST]: (node:any, children:any) => <ol className='pl-8 list-decimal'>{children}</ol>,
-    [BLOCKS.LIST_ITEM]: (node:any, children:any) => <li className=''>{children}</li>,
+    [BLOCKS.UL_LIST]: (node:any, children:any) => <ul className='pl-8 list-disc w-full'>{children}</ul>,
+    [BLOCKS.OL_LIST]: (node:any, children:any) => <ol className='pl-8 list-decimal w-full'>{children}</ol>,
+    [BLOCKS.LIST_ITEM]: (node:any, children:any) => <li className='w-full'>{children}</li>,
 
     [BLOCKS.TABLE]: (node:any, children:any) => (
-      <table className="w-full">{children}</table>
+      <table className="w-full" suppressHydrationWarning>{children}</table>
     ),
     [BLOCKS.TABLE_ROW]: (node:any, children:any) => (
-      <tr className="even:bg-gray-100">{children}</tr>
+      <tr className="even:bg-gray-100" suppressHydrationWarning>{children}</tr>
     ),
     [BLOCKS.TABLE_CELL]: (node:any, children:any) => (
-      <td className="px-2">{children}</td>
+      <td className="px-2" suppressHydrationWarning>{children}</td>
     ),
     [BLOCKS.TABLE_HEADER_CELL]: (node:any, children:any) => (
-      <th className="text-start px-2">{children}</th>
+      <th className="text-start px-2" suppressHydrationWarning>{children}</th>
     ),
 
     [BLOCKS.PARAGRAPH]: (node:any, children:any) => {
@@ -53,7 +53,7 @@ const options = {
       return (
         <>
         <hr className='block bg-transparent h-1 border-0'/>
-        <p className='text-gray-800'>{children}</p>
+        <p className='text-gray-800 w-full'>{children}</p>
         <hr className='block bg-transparent h-2 border-0'/>
         </>
       )
@@ -113,7 +113,7 @@ const RichText = ({ content }: { content: any }) => {
     return null;
   }
 
-  return <>{documentToReactComponents(content, options)}</>;
+  return <div suppressHydrationWarning>{documentToReactComponents(content, options)}</div>;
 };
 
 export default RichText;
